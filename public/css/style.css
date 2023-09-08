@@ -67,7 +67,7 @@ a {
 	background: var(--dark-color-b);
 	color: #fff;
 	padding: 20px 20px 60px;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .chat-sidebar h2 {
@@ -88,7 +88,7 @@ a {
 .chat-messages {
 	padding: 30px;
 	max-height: 500px;
-	overflow-y: scroll;
+	overflow-y:auto;
 }
 
 .chat-messages .message {
@@ -178,7 +178,6 @@ a {
 	margin-top: 20px;
 	width: 100%;
 }
-
 @media (max-width: 700px) {
 	.chat-main {
 		display: block;

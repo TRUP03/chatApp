@@ -1,4 +1,5 @@
 //jshint esversion:6
+const socket = io();
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
@@ -9,7 +10,6 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
-const socket = io();
 
 // Join chatroom
 socket.emit('joinRoom', { username, room });
@@ -23,6 +23,7 @@ socket.on('roomUsers', ({ room, users }) => {
 // Message from server
 socket.on('message', (message) => {
   console.log(message);
+  // console.log(id);
   outputMessage(message);
 
   // Scroll down
@@ -57,7 +58,7 @@ function outputMessage(message) {
   const p = document.createElement('p');
   p.classList.add('meta');
   p.innerText = message.username;
-  p.innerHTML += `<span>${message.time}</span>`;
+  p.innerHTML += `<span> ${message.time}</span>`;
   div.appendChild(p);
   const para = document.createElement('p');
   para.classList.add('text');
