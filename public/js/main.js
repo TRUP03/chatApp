@@ -4,7 +4,7 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
-
+// var aud = new Audio('ting.mp3');
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
@@ -25,7 +25,7 @@ socket.on('message', (message) => {
   console.log(message);
   // console.log(id);
   outputMessage(message);
-
+  // aud.play();
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
@@ -44,6 +44,7 @@ chatForm.addEventListener('submit', (e) => {
   }
 
   // Emit message to server
+  // outputMessage(msg,'right');
   socket.emit('chatMessage', msg);
 
   // Clear input
@@ -53,18 +54,29 @@ chatForm.addEventListener('submit', (e) => {
 
 // Output message to DOM
 function outputMessage(message) {
-  const div = document.createElement('div');
-  div.classList.add('message');
-  const p = document.createElement('p');
-  p.classList.add('meta');
-  p.innerText = message.username;
-  p.innerHTML += `<span> ${message.time}</span>`;
-  div.appendChild(p);
-  const para = document.createElement('p');
-  para.classList.add('text');
-  para.innerText = message.text;
-  div.appendChild(para);
-  document.querySelector('.chat-messages').appendChild(div);
+  if( message.username=="ChatCordBot"){
+    const div = document.createElement('div'); 
+    div.innerText = message.text;
+    div.classList.add('joined');
+    document.querySelector('.chat-messages').appendChild(div);
+  }
+  else{
+      const div = document.createElement('div');
+      // if(pos=="right")
+      div.classList.add('message');
+      // else div.classList.add('my');
+      const p = document.createElement('p');
+      p.classList.add('meta');
+      p.innerText = message.username;
+      p.innerHTML += `<span> ${message.time}</span>`;
+      div.appendChild(p);
+      const para = document.createElement('p');
+      para.classList.add('text');
+      para.innerText = message.text;
+      div.appendChild(para);
+      document.querySelector('.chat-messages').appendChild(div);
+  }
+  // aud.play();
 }
 
 // Add room name to DOM
