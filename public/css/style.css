@@ -100,7 +100,7 @@ a {
 	background-color:#c4c5ca;
 	border-radius: 5px;
 	overflow-wrap: break-word;
-	max-width: 50%;
+	/* max-width: 50%; */
 }
 .chat-messages .my {
 	padding: 10px;
@@ -109,8 +109,10 @@ a {
 	border-radius: 5px;
 	overflow-wrap: break-word;
 	max-width: 50%;
-	float:left;
-	clear:both;
+	/* float:left;
+	clear:both; */
+	display: flex;
+	justify-content: end;
 }
 
 .chat-messages .message .meta {
